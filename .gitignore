@@ -1,0 +1,42 @@
+# --- .NET ---
+bin/
+obj/
+*.user
+*.suo
+.vs/
+TestResults/
+*.trx
+coverage/
+
+# --- Node / frontend ---
+node_modules/
+dist/
+build/
+.expo/
+.turbo/
+*.tsbuildinfo
+npm-debug.log*
+pnpm-debug.log*
+
+# --- Environment & secrets ---
+.env
+.env.*
+!.env.example
+appsettings.*.local.json
+*.pfx
+*.pem
+
+# --- Local data: NEVER commit real health data ---
+data/
+uploads/
+storage/
+*.db
+*.sqlite
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
