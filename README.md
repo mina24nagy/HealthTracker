@@ -36,3 +36,7 @@ This repo is public. **No real health data is ever committed** — only syntheti
 ## Getting started
 
 _Coming in M0._ Prerequisites will be: .NET 10 SDK, Node.js 22+, pnpm, Docker.
+
+## License
+
+Copyright © 2026 Mina Nagy. All rights reserved — the source is public for reference only. See [LICENSE](LICENSE).
