@@ -10,10 +10,10 @@
   },
   "scripts": {
     "dev": "pnpm -r --parallel --if-present run dev",
-    "build": "pnpm -r --if-present run build && dotnet build apps/api",
-    "test": "pnpm -r --if-present run test && dotnet test apps/api",
-    "lint": "eslint . && prettier --check . && dotnet format apps/api --verify-no-changes",
-    "format": "prettier --write . && dotnet format apps/api",
+    "build": "pnpm -r --if-present run build && dotnet build apps/api/HealthTracker.slnx",
+    "test": "pnpm -r --if-present run test && dotnet test --solution apps/api/HealthTracker.slnx",
+    "lint": "eslint . && prettier --check . && dotnet format apps/api/HealthTracker.slnx --verify-no-changes",
+    "format": "prettier --write . && dotnet format apps/api/HealthTracker.slnx",
     "typecheck": "pnpm -r --if-present run typecheck"
   },
   "devDependencies": {

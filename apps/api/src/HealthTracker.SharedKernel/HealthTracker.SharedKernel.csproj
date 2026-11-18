@@ -1,5 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <!-- Cross-cutting primitives shared by all modules (ADR-0002). Common settings come from Directory.Build.props. -->
+  <!-- References ASP.NET Core only for the IModule contract (service registration + endpoint mapping). -->
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
 </Project>

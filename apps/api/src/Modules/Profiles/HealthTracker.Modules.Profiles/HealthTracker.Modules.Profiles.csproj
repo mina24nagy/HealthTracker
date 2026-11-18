@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Profiles module: households, family profiles and access (ADR-0006). Implemented in #7. -->
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\HealthTracker.SharedKernel\HealthTracker.SharedKernel.csproj" />
+  </ItemGroup>
+
+</Project>
