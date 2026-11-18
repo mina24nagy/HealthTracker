@@ -1,0 +1,26 @@
+{
+  "name": "healthtracker",
+  "private": true,
+  "description": "Personal & family health record — monorepo root",
+  "license": "UNLICENSED",
+  "type": "module",
+  "packageManager": "pnpm@12.21.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel --if-present run dev",
+    "build": "pnpm -r --if-present run build && dotnet build apps/api",
+    "test": "pnpm -r --if-present run test && dotnet test apps/api",
+    "lint": "eslint . && prettier --check . && dotnet format apps/api --verify-no-changes",
+    "format": "prettier --write . && dotnet format apps/api",
+    "typecheck": "pnpm -r --if-present run typecheck"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
+    "prettier": "^3.10.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.73.0"
+  }
+}

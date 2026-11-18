@@ -1,0 +1,10 @@
+node_modules
+dist
+build
+coverage
+pnpm-lock.yaml
+apps/api/**/bin
+apps/api/**/obj
+# Hand-written docs keep their own formatting
+docs
+CHANGELOG.md

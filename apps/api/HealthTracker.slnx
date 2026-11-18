@@ -1,0 +1,5 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/HealthTracker.SharedKernel/HealthTracker.SharedKernel.csproj" />
+  </Folder>
+</Solution>
