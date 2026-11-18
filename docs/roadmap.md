@@ -20,17 +20,19 @@ Order is driven by personal value: Nutrition first because new InBody data arriv
 
 ---
 
-## M0 — Foundation (draft issues)
+## M0 — Foundation ([milestone](https://github.com/mina24nagy/HealthTracker/milestone/1))
 
-1. Repository setup: docs, ADRs, templates, conventions ✅ _(this kickoff)_
-2. Monorepo scaffolding: `pnpm` workspace, `apps/api`, `apps/web`, `packages/api-client`
-3. API skeleton: .NET 10, modular monolith layout, health checks, OpenAPI, structured logging
-4. Local stack: Docker Compose with PostgreSQL; EF Core migrations
-5. Web skeleton: React + TS + Vite, routing, UI kit, API client generated from OpenAPI
-6. Authentication (see ADR-0009)
-7. Profiles & household: create household, add profiles (self, spouse, mother, deceased relatives), access roles
-8. CI: GitHub Actions — build, lint, test for API and web
-9. Testing baseline: unit + integration (Testcontainers) + one Playwright smoke test
+1. [#1](https://github.com/mina24nagy/HealthTracker/issues/1) Repository setup: docs, ADRs, templates, conventions ✅
+2. [#2](https://github.com/mina24nagy/HealthTracker/issues/2) Monorepo scaffolding: `pnpm` workspace, `apps/api`, `apps/web`, `packages/api-client`
+3. [#3](https://github.com/mina24nagy/HealthTracker/issues/3) API skeleton: .NET 10, modular monolith layout, health checks, OpenAPI, structured logging
+4. [#4](https://github.com/mina24nagy/HealthTracker/issues/4) Local stack: Docker Compose with PostgreSQL; EF Core migrations
+5. [#5](https://github.com/mina24nagy/HealthTracker/issues/5) Web skeleton: React + TS + Vite, routing, UI kit, API client generated from OpenAPI
+6. [#6](https://github.com/mina24nagy/HealthTracker/issues/6) Authentication (see ADR-0009)
+7. [#7](https://github.com/mina24nagy/HealthTracker/issues/7) Profiles & household: create household, add profiles (self, spouse, mother, deceased relatives), access roles
+8. [#8](https://github.com/mina24nagy/HealthTracker/issues/8) CI: GitHub Actions — build, lint, test for API and web
+9. [#9](https://github.com/mina24nagy/HealthTracker/issues/9) Testing baseline: unit + integration (Testcontainers) + one Playwright smoke test
+
+**Suggested order:** #2 → #3 → #4 → #8 → #9 → #5 → #6 → #7 (get CI green early so every later PR is checked).
 
 ## M1 — Nutrition & InBody (draft scope, refined when we start)
 
