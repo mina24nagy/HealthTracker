@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!-- Host: composes the modules into one deployable app (ADR-0002). -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\HealthTracker.SharedKernel\HealthTracker.SharedKernel.csproj" />
+    <ProjectReference Include="..\Modules\Profiles\HealthTracker.Modules.Profiles\HealthTracker.Modules.Profiles.csproj" />  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Scalar.AspNetCore" />
+  </ItemGroup>
+
+</Project>
