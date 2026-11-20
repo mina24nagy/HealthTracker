@@ -25,6 +25,7 @@ This is also a deliberately documented side project: every decision is recorded 
 - [Vision](docs/vision.md) — the problem, users and principles
 - [Roadmap](docs/roadmap.md) — milestones M0…M8
 - [Domain model](docs/domain-model.md) — the core concepts and vocabulary
+- [Architecture overview](docs/architecture/overview.md) — modular monolith, vertical slices, enforced boundaries
 - [Architecture Decision Records](docs/adr/README.md)
 - [Devlog](docs/devlog/) — the build story, milestone by milestone
 - [Changelog](CHANGELOG.md)
