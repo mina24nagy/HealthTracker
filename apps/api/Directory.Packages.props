@@ -10,6 +10,12 @@
     <PackageVersion Include="Scalar.AspNetCore" Version="3.0.2" />
   </ItemGroup>
 
+  <ItemGroup Label="Persistence">
+    <!-- EF Core 10.0.x (LTS line); Npgsql provider versions independently on the same major. -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.15" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.4" />
+  </ItemGroup>
+
   <ItemGroup Label="Testing">
     <!-- xunit.v3 runs on Microsoft.Testing.Platform (opted in via global.json), so no VSTest packages are needed. -->
     <PackageVersion Include="NetArchTest.Rules" Version="1.3.2" />

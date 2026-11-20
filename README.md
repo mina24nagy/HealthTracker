@@ -41,15 +41,44 @@ This repo is public. **No real health data is ever committed** — only syntheti
 - [.NET 10 SDK](https://dotnet.microsoft.com/download) (pinned in `global.json`)
 - [Node.js](https://nodejs.org/) 22+
 - [pnpm](https://pnpm.io/) (version pinned in `package.json` → `packageManager`)
-- [Docker](https://www.docker.com/) (needed from [#4](https://github.com/mina24nagy/HealthTracker/issues/4))
+- [Docker](https://www.docker.com/) (Docker Desktop on Windows/macOS)
 
 ### Setup
 
 ```bash
 pnpm install
-pnpm build        # TypeScript packages + .NET solution
+dotnet tool restore   # dotnet-ef, pinned in dotnet-tools.json
+pnpm build            # TypeScript packages + .NET solution
 pnpm test
-pnpm lint         # ESLint + Prettier + dotnet format
+pnpm lint             # ESLint + Prettier + dotnet format
+```
+
+### Run locally
+
+```bash
+docker compose up -d --build    # API (http://localhost:5080) + PostgreSQL
+docker compose up -d postgres   # or: only the database, then run the API from your IDE / `dotnet run`
+docker compose down             # stop (data is kept in the postgres-data volume)
+```
+
+In Development the API applies every module's EF Core migrations at startup. Useful URLs: `/health/ready`, `/scalar` (API reference), `/openapi/v1.json`.
+
+The defaults in `compose.yaml` are local-only development credentials (ports bound to `127.0.0.1`); override them in a git-ignored `.env` (see [.env.example](.env.example)).
+
+### Database migrations (one schema and migration set per module)
+
+```bash
+dotnet ef migrations add <Name> \
+  --project apps/api/src/Modules/Profiles/HealthTracker.Modules.Profiles \
+  --startup-project apps/api/src/HealthTracker.Api \
+  --context ProfilesDbContext --output-dir Persistence/Migrations
+```
+
+### Backup and restore (local data)
+
+```powershell
+./scripts/db-backup.ps1                                   # → backups/healthtracker-<timestamp>.dump (git-ignored)
+./scripts/db-restore.ps1 -Path ./backups/<file>.dump      # destructive; asks for confirmation
 ```
 
 ### Repository layout
@@ -62,7 +91,9 @@ apps/
 packages/
   api-client/     TS client generated from OpenAPI (#5)
   shared/         Types and helpers shared by the clients
-docs/             Vision, roadmap, ADRs, devlog
+docs/             Vision, roadmap, ADRs, devlog, architecture
+scripts/          Local database backup / restore
+compose.yaml      Local stack: API + PostgreSQL
 ```
 
 ## License

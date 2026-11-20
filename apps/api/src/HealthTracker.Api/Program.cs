@@ -16,6 +16,7 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddOpenApiDocumentation();
 builder.Services.AddHealthChecks();
+builder.AddPostgres();
 
 foreach (var module in modules)
 {
@@ -23,6 +24,8 @@ foreach (var module in modules)
 }
 
 var app = builder.Build();
+
+await app.MigrateModuleDatabasesAsync();   // Development only
 
 app.UseExceptionHandler();
 app.UseStatusCodePages();   // empty 4xx/5xx responses get a ProblemDetails body too
@@ -36,4 +39,4 @@ foreach (var module in modules)
     module.MapEndpoints(api);
 }
 
-app.Run();
+await app.RunAsync();

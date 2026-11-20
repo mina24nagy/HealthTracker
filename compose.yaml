@@ -1,0 +1,45 @@
+# Local development stack (ADR-0008).
+#   docker compose up -d --build     API + PostgreSQL
+#   docker compose up -d postgres    only the database (run the API from your IDE)
+#
+# Credentials below are local-development defaults, not secrets: ports are bound to 127.0.0.1 only.
+# Override them in a git-ignored .env file (see .env.example).
+
+name: healthtracker
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-healthtracker}
+      POSTGRES_USER: ${POSTGRES_USER:-healthtracker}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-healthtracker_dev}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      # PostgreSQL 18+ images keep data under /var/lib/postgresql/<major>/…; mount the parent.
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__HealthTracker: >-
+        Host=postgres;Port=5432;Database=${POSTGRES_DB:-healthtracker};Username=${POSTGRES_USER:-healthtracker};Password=${POSTGRES_PASSWORD:-healthtracker_dev};GSS Encryption Mode=Disable
+    ports:
+      - "127.0.0.1:${API_PORT:-5080}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:

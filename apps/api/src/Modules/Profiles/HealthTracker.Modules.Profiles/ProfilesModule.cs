@@ -1,5 +1,7 @@
 using HealthTracker.Modules.Profiles.Features;
+using HealthTracker.Modules.Profiles.Persistence;
 using HealthTracker.SharedKernel.Modules;
+using HealthTracker.SharedKernel.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -13,10 +15,8 @@ public sealed class ProfilesModule : IModule
 {
     public string Name => "Profiles";
 
-    public void AddServices(IServiceCollection services, IConfiguration configuration)
-    {
-        // Persistence and services arrive with #4 (EF Core) and #7 (households & profiles).
-    }
+    public void AddServices(IServiceCollection services, IConfiguration configuration) =>
+        services.AddModuleDbContext<ProfilesDbContext>(ProfilesDbContext.Schema);
 
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {

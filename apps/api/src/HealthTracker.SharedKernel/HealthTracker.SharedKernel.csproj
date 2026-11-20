@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <!-- Cross-cutting primitives shared by all modules (ADR-0002). Common settings come from Directory.Build.props. -->
-  <!-- References ASP.NET Core only for the IModule contract (service registration + endpoint mapping). -->
+  <!-- ASP.NET Core: for the IModule contract. EF Core + Npgsql: for the module persistence building block. -->
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 
 </Project>

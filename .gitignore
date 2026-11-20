@@ -32,6 +32,8 @@ uploads/
 storage/
 *.db
 *.sqlite
+backups/
+*.dump
 
 # --- OS / editors ---
 .DS_Store

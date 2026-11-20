@@ -1,0 +1,18 @@
+# Only apps/api, global.json and .editorconfig are needed by apps/api/Dockerfile.
+.git
+.github
+.config
+node_modules
+**/node_modules
+**/bin
+**/obj
+**/dist
+apps/web
+apps/mobile
+packages
+docs
+backups
+data
+.env
+.env.*
+*.md
