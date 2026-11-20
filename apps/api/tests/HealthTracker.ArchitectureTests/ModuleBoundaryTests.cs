@@ -1,6 +1,8 @@
 using System.Reflection;
 using HealthTracker.SharedKernel;
 using HealthTracker.SharedKernel.Modules;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using NetArchTest.Rules;
 using TestResult = NetArchTest.Rules.TestResult;
 
@@ -72,7 +74,7 @@ public sealed class ModuleBoundaryTests
         var leaked =
             from module in Modules
             from type in module.GetExportedTypes()
-            where !typeof(IModule).IsAssignableFrom(type) && !IsContract(type)
+            where !typeof(IModule).IsAssignableFrom(type) && !IsContract(type) && !IsGeneratedMigration(type)
             select type.FullName;
 
         Assert.Empty(leaked);
@@ -108,6 +110,10 @@ public sealed class ModuleBoundaryTests
         var result = Types.InAssembly(consumer).ShouldNot().HaveDependencyOnAny(internalTypes).GetResult();
         return result.IsSuccessful ? [] : [.. result.FailingTypeNames ?? []];
     }
+
+    /// <summary>EF Core generates migrations and model snapshots as public classes; they are not module API.</summary>
+    private static bool IsGeneratedMigration(Type type) =>
+        typeof(Migration).IsAssignableFrom(type) || typeof(ModelSnapshot).IsAssignableFrom(type);
 
     private static bool IsContract(Type type) =>
         type.Namespace?.Split('.').Contains("Contracts") ?? false;

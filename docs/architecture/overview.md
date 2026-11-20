@@ -88,6 +88,16 @@ The first slice is [`Features/GetProfile.cs`](../../apps/api/src/Modules/Profile
 
 The Clean Architecture *principle* — dependencies point inward, the domain does not know about infrastructure — still applies **inside a module whose domain is rich** (e.g. Labs: units, reference ranges, conversions get a real `Domain/` with behaviour). Simple CRUD-like modules don't need it. Structure scales with complexity instead of being imposed uniformly.
 
+### Persistence per module
+
+The host owns **one** `NpgsqlDataSource` (connection pool). Each module registers its own `DbContext` with one call:
+
+```csharp
+services.AddModuleDbContext<ProfilesDbContext>(ProfilesDbContext.Schema);   // "profiles"
+```
+
+which gives the module its **own schema** (`HasDefaultSchema`), its **own migrations** (in `Persistence/Migrations`) and its **own history table** (`profiles."__EFMigrationsHistory"`). Modules are migrated independently; in Development the host applies all of them at startup (`IModuleDatabase`). `/health/ready` checks PostgreSQL connectivity.
+
 ---
 
 ## Level 3 — Ports & adapters (only at infrastructure edges)

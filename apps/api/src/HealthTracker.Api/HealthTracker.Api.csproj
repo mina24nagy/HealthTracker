@@ -4,11 +4,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HealthTracker.SharedKernel\HealthTracker.SharedKernel.csproj" />
-    <ProjectReference Include="..\Modules\Profiles\HealthTracker.Modules.Profiles\HealthTracker.Modules.Profiles.csproj" />  </ItemGroup>
+    <ProjectReference Include="..\Modules\Profiles\HealthTracker.Modules.Profiles\HealthTracker.Modules.Profiles.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Scalar.AspNetCore" />
+    <!-- Design-time only: lets `dotnet ef` use this project as the startup project. Not shipped. -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

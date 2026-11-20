@@ -53,6 +53,10 @@ dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 dotnet_naming_style.underscore_camel.required_prefix = _
 dotnet_naming_style.underscore_camel.capitalization = camel_case
 
+[**/Persistence/Migrations/*.cs]
+# EF Core output: no style rules or analyzers on generated migrations
+generated_code = true
+
 [apps/api/tests/**.cs]
 # Test names read as sentences: Profile_cannot_be_read_without_access
 dotnet_diagnostic.CA1707.severity = none
